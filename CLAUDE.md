@@ -6,7 +6,7 @@ Arquitetura, ADRs e roadmap estão em `docs/`. Leia `docs/adr/` antes
 de qualquer decisão estrutural.
 
 ## Stack
-- Java 21, Spring Boot 3, Maven (multi-módulo)
+- Java 21, Spring Boot 4.1, Maven (multi-módulo)
 - Spring Cloud Gateway, Spring Security + JWT
 - Kafka, PostgreSQL, MongoDB, Redis
 - Docker Compose para ambiente local

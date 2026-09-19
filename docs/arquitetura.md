@@ -66,7 +66,7 @@ Escolhida para se apoiar na sua stack de produção atual, evitando ferramentas 
 
 | Camada | Tecnologia | Justificativa |
 | --- | --- | --- |
-| Linguagem / Framework | Java 21 + Spring Boot 3 | Stack principal já dominada |
+| Linguagem / Framework | Java 21 + Spring Boot 4.1 | Stack principal já dominada; ver ADR-007 |
 | Segurança | Spring Security + JWT | Autenticação stateless entre Gateway e serviços |
 | API Gateway | Spring Cloud Gateway | Integração nativa com o ecossistema Spring |
 | Comunicação síncrona | REST (OpenFeign entre serviços quando necessário) | Simplicidade e observabilidade de contrato |
