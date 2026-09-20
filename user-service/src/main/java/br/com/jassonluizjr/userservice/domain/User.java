@@ -22,6 +22,9 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    // Constraint real: uk_users_email em V1__create_users.sql.
+    // Aqui apenas documenta a regra — ddl-auto: validate nao valida
+    // constraints de unicidade.
     @Column(nullable = false, unique = true)
     private String email;
 

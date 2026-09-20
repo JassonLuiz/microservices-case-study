@@ -28,6 +28,9 @@ de qualquer decisão estrutural.
 - Branch: feature/<servico>-<descricao-curta>
 - Pacotes: br.com.<seunome>.<servico>
 - Camadas por serviço: controller / service / repository / domain / config
+- O schema pertence exclusivamente ao Flyway. Anotações de constraint na
+  entidade (unique, nullable etc.) são documentação, nunca fonte da
+  verdade — com ddl-auto: validate, quem garante a regra é a migration.
 
 ## Comandos úteis
 - Subir ambiente local: `docker compose up -d`
