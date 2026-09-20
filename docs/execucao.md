@@ -213,6 +213,55 @@ O ciclo que se repete para cada tarefa do roadmap:
 
 **Sessões longas:** peça periodicamente `Atualize o CLAUDE.md com as decisões que tomamos nesta sessão` — assim o contexto que importa sobrevive ao fim da conversa.
 
+## Ritual de Início e Fim de Dia
+
+O repositório é a memória do projeto, não a sessão. O Claude Code esquece tudo ao fechar — o que estiver commitado sobrevive. Todo ritual abaixo existe para transferir o que está na sessão para dentro do repo.
+
+### Ao encerrar o dia
+
+Peça ao Claude Code antes de fechar:
+
+```
+Vamos encerrar por hoje. Antes:
+1. Rode mvn clean verify e me mostre o resultado.
+2. Atualize o CLAUDE.md se alguma decisão ou convenção nova surgiu hoje.
+3. Commite o que está pronto. O que estiver pela metade, commite como WIP
+   numa branch feature/ com uma mensagem dizendo onde parou.
+4. Me escreva 5 linhas em docs/PROGRESSO.md: o que foi feito hoje, o que
+   ficou incompleto e qual é o próximo passo.
+```
+
+Depois, no terminal:
+
+```bash
+git status      # nada importante fora do controle de versão
+git push        # tudo no remoto, não só na máquina local
+```
+
+`docs/PROGRESSO.md` é a peça central do ritual: uma seção curta por dia, em ordem cronológica inversa. É o que devolve o contexto em 30 segundos no dia seguinte, e no fim do projeto vira material para o README contar a evolução do case.
+
+### Ao retomar
+
+```bash
+git checkout develop && git pull
+git branch -a        # verifique se ficou alguma branch feature/ aberta
+```
+
+E abra a sessão com:
+
+```
+Leia CLAUDE.md, docs/PROGRESSO.md e o ADR mais recente em docs/adr/.
+Rode git log --oneline -10 e me diga onde paramos e qual o próximo passo.
+```
+
+### Três regras que evitam perda real
+
+- **Nunca deixe trabalho só na máquina local.** O `git push` é o que garante que um problema no notebook não custe um dia de trabalho.
+- **Nunca deixe uma decisão só na conversa.** Discussão de 20 minutos que chegou a uma conclusão vira ADR ou linha no `CLAUDE.md` antes de fechar o dia.
+- **Encerre com a fatia concluída.** Parar no meio de uma fatia de implementação é onde mais se perde contexto — por isso cada fase do roadmap é dividida em pedaços pequenos.
+
+O comando `/resume` do Claude Code retoma a sessão anterior e ajuda a voltar de uma queda no mesmo dia, mas não substitui o ritual: ele não reconstrói uma semana de trabalho.
+
 ## Prompts por Fase
 
 Use como ponto de partida, adaptando conforme o projeto evolui. Sempre peça o plano antes do código.

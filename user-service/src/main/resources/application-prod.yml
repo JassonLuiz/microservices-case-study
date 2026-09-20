@@ -1,0 +1,14 @@
+logging:
+  level:
+    root: WARN
+    br.com.jassonluizjr: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+spring:
+  flyway:
+    clean-disabled: true
