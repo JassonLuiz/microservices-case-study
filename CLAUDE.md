@@ -26,7 +26,7 @@ de qualquer decisão estrutural.
 ## Convenções
 - Commits: Conventional Commits (feat:, fix:, chore:, docs:, test:)
 - Branch: feature/<servico>-<descricao-curta>
-- Pacotes: br.com.<seunome>.<servico>
+- Pacotes: br.com.jassonluizjr.<servico> (ex.: br.com.jassonluizjr.userservice)
 - Camadas por serviço: controller / service / repository / domain / config
 - O schema pertence exclusivamente ao Flyway. Anotações de constraint na
   entidade (unique, nullable etc.) são documentação, nunca fonte da
@@ -34,7 +34,7 @@ de qualquer decisão estrutural.
 
 ## Comandos úteis
 - Subir ambiente local: `docker compose up -d`
-- Rodar testes de um serviço: `mvn -pl order-service test`
+- Rodar testes de um serviço: `mvn -pl user-service test`
 - Build completo: `mvn clean install`
 
 ## Como trabalhar comigo
