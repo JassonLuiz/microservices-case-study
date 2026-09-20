@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+
+spring:
+  flyway:
+    clean-disabled: true

@@ -20,6 +20,8 @@ de qualquer decisão estrutural.
 - Código novo sem teste não é considerado pronto.
 - Nunca commitar credencial. Configuração sensível vem de variável
   de ambiente.
+- Nunca incluir o campo password em toString(), log ou resposta de API —
+  nem via geração automática de IDE/Lombok.
 
 ## Convenções
 - Commits: Conventional Commits (feat:, fix:, chore:, docs:, test:)
@@ -36,3 +38,25 @@ de qualquer decisão estrutural.
 - Antes de implementar algo grande, apresente o plano e espere aprovação.
 - Trabalhe um serviço/fase por vez, conforme o roadmap em `docs/`.
 - Ao terminar uma tarefa, rode os testes e mostre o resultado.
+
+## Particularidades do Spring Boot 4.1
+Descobertas na Fase 1 (user-service) que evitam redescoberta em sessões futuras:
+
+- **Test slices reorganizados em módulos por feature.** `@DataJpaTest` e
+  `@AutoConfigureTestDatabase` saíram de `spring-boot-test-autoconfigure`
+  e foram para módulos dedicados (`org.springframework.boot.data.jpa.test.autoconfigure`,
+  `org.springframework.boot.jdbc.test.autoconfigure`). Além disso,
+  `@DataJpaTest` **não** importa `FlywayAutoConfiguration` automaticamente
+  nessa versão — teste de repository com migration real fica mais simples
+  usando `@SpringBootTest(webEnvironment = NONE)` + `@Transactional` (sobe
+  o contexto de aplicação completo, com Flyway) do que remontar a lista de
+  auto-configurations da slice manualmente.
+- **Flyway virou módulo separado.** Ter só `flyway-core` (+ `flyway-database-postgresql`)
+  no classpath não ativa mais o auto-configure. É preciso a dependência
+  `org.springframework.boot:spring-boot-starter-flyway`, que traz o módulo
+  `spring-boot-flyway` com `FlywayAutoConfiguration`.
+- **Testcontainers 2.0** (gerenciado pelo BOM do Boot 4.1) renomeou os
+  artefatos com prefixo `testcontainers-` (ex.: `org.testcontainers:testcontainers-postgresql`,
+  `org.testcontainers:testcontainers-junit-jupiter`), diferente das
+  coordenadas antigas (`org.testcontainers:postgresql`, `org.testcontainers:junit-jupiter`)
+  usadas em exemplos e tutoriais anteriores ao Boot 4.
